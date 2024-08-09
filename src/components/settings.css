@@ -1,0 +1,130 @@
+.settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    height: 100vh;
+    width: 60vw;
+
+    background-color: var(--clr-red50);
+
+    transform: translateY(100vh);
+    transition: all 0.3s ease-in-out;
+}
+.settings__button{
+    position: absolute;
+    z-index: 20;
+    
+    padding: 0.75rem;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    right: 0;
+    bottom: 0;
+    
+    transition: all 0.3s ease-in-out;
+}
+.settings__gear{
+    width: var(--size-5xl);
+    height: var(--size-5xl);
+}
+
+.settings__menu{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 4rem;
+}
+.settings__list{
+    padding: 0;
+}
+.settings__item{
+    list-style: none;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+
+    font-size: var(--size-xl);
+    line-height: 3rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+
+.settings__username{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+.settings__password{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.settings__username__input{
+    width: 8rem;
+    height: 1.5rem;
+    font-size: var(--size-lg);
+
+    background-color: #f0e5e5;
+    border: none;
+}
+.settings__password__input{
+    margin-left: 0.4rem;
+    width: 8rem;
+    height: 1.5rem;
+    font-size: var(--size-lg);
+
+    background-color: #f0e5e5;
+    border: none;
+}
+.settings__auto{
+    font-size: var(--size-lg);
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.15);
+    transition: all 0.1s ease-in-out;
+    transform: translateY(0.1rem);
+    cursor: pointer;
+}
+.settings__moon {
+    width: var(--size-xl);
+    height: var(--size-xl);
+    transform: translateY(0.2rem);
+    color: rgba(0, 0, 0, 0.15);
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+.settings__sun {
+    width: var(--size-2xl);
+    height: var(--size-2xl);
+    transform: translateY(0.2rem);
+    color: rgba(0, 0, 0, 0.15);
+    padding: 0;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+.settings__auto:not(.active):hover,
+.settings__moon:not(.active):hover,
+.settings__sun:not(.active):hover{
+    color: rgba(0, 0, 0, 0.3);
+}
+.active{
+    color: var(--clr-dark);
+    font-weight: 900;
+}
+.dark-mode{
+    color: rgba(128, 128, 128, 0.5);
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pop bot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=panchang@200,400,500,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+
+      <section class="settings">
+        <div class="settings__menu">
+            <ul class="settings__list">
+              <li class="settings__item">
+                <h3>Auto Log-in:</h3>
+                <h3 class="active settings__auto__on settings__auto">ON</h3>
+                <h3 class="settings__auto__off settings__auto">OFF</h3>
+              </li>
+              <li class="settings__item">
+                <div class="settings__username">
+                  <h3 class="settings__username__title">Username: </h3>
+                  <input class="settings__username__input">
+                </div>
+              </li>
+              <li class="settings__item">
+                <div class="settings__password">
+                  <h3 class="settings__password__title">Password: </h3>
+                  <input class="settings__password__input">
+                </div>
+              </li>
+              <li class="settings__item">
+                <h3>Display Mode:</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="settings__sun active">
+                  <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="settings__moon">
+                  <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd" />
+                </svg>
+              </li>
+              
+            </ul>
+        </div>
+      </section>
+
+      <button class="settings__button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="settings__gear">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      </button>
+
+      <section class="menu">
+          <ul class="menu__list">
+
+            <li class="menu__item refresh">
+              <button class="refresh__button">Start</button>
+              <div class = refresh__settings>
+                <form class="refresh__speed">
+                  <h3 class="refresh__speed__title">Speed</h3>
+                  <div class="slide-output__container">
+                    <div class="slidecontainer">
+                      <input type="range" min="1" max="10" value="5" class="refresh__speed__slider slider">
+                    </div>
+                    <h3 class="refresh__speed__output">5</h3>
+                  </div>
+                </form>
+                <form class="refresh__count">
+                  <div class="slide-output__container">
+                    <div class="slidecontainer">
+                      <input type="range" min="2" max="100" value="100" class="refresh__count__slider slider">
+                    </div>
+                    <h3 class="refresh__count__output">All</h3>
+                  </div>
+                  <h3 class="refresh__count__title">Count</h3>
+                </form>
+              </div>
+              <h2 class="menu__item__title">Refresh Listings</h2>
+            </li>
+
+            <li class="menu__item followers">
+              <div class= followers__settings>
+                <div class = followers__button__container>
+                  <button class="followers__button__filter">Filter Following</button>
+                  <button class="followers__button__mass">Mass Follow</button>
+                </div>
+                <div class="followers__options__container">
+                  <div class="followers__radio__container">
+                    <label class="radio__container">all following
+                      <input type="radio" checked="checked" name="radio">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="radio__container">non-followers
+                      <input type="radio" name="radio">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                  <div class="followers__slider__container">
+                    <div class="slidecontainer">
+                      <input type="range" min="2" max="100" value="100" class="followers__slider slider">
+                    </div>
+                    <h3 class="followers__output">750</h3>
+                  </div>
+                  <h3 class="followers__count__title">Count</h3>
+                </div>
+              </div>
+              <h2 class="menu__item__title">Manage Followers</h2>
+            </li>
+
+            <li class="menu__item interact">
+              <button class="interact__button">Start</button>
+              <div class = interact__settings>
+                <form class="interact__options">
+                  <div class="interact__radio__container">
+                    <label class="radio__container">Based on own items
+                      <input type="radio" checked="checked" name="radio">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="radio__container">Based on follower items
+                      <input type="radio" name="radio">
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="radio__container">Based on following items
+                      <input type="radio" name="radio">
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </form>
+                <form class="interact__count">
+                  <h3 class="interact__count__title">Count</h3>
+                  <div class="slide-output__container">
+                    <div class="interact__slidecontainer">
+                      <input type="range" min="1" max="100" value="100" class="interact__slider slider">
+                    </div>
+                    <h3 class="interact__count__output">100</h3>
+                  </div>
+                </form>
+              </div>
+              <h2 class="menu__item__title">Interact with Posts</h2>
+            </li>
+
+          </ul>
+          <hr class="main__bar">
+      </section>
+
+      <section class="title">
+        <h1 class="title__header">Pop bot</h1>
+        <p class="title__text">Depop simplified.</p>
+      </section>
+
+    </main>
+    <script type="module" src="/src/renderer.js"></script>
+  </body>
+</html>
