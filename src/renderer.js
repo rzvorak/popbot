@@ -1,31 +1,3 @@
-/**
- * This file will automatically be loaded by vite and run in the "renderer" context.
- * To learn more about the differences between the "main" and the "renderer" context in
- * Electron, visit:
- *
- * https://electronjs.org/docs/tutorial/application-architecture#main-and-renderer-processes
- *
- * By default, Node.js integration in this file is disabled. When enabling Node.js integration
- * in a renderer process, please be aware of potential security implications. You can read
- * more about security risks here:
- *
- * https://electronjs.org/docs/tutorial/security
- *
- * To enable Node.js integration in this file, open up `main.js` and enable the `nodeIntegration`
- * flag:
- *
- * ```
- *  // Create the browser window.
- *  mainWindow = new BrowserWindow({
- *    width: 800,
- *    height: 600,
- *    webPreferences: {
- *      nodeIntegration: true
- *    }
- *  });
- * ```
- */
-
 import './index.css';
 import './utils.css';
 import './components/main.css';
@@ -37,6 +9,8 @@ const autoOn = document.querySelector(".settings__auto__on");
 const autoOff= document.querySelector(".settings__auto__off");
 const lightMode = document.querySelector(".settings__sun");
 const darkMode = document.querySelector(".settings__moon");
+const usernameInput = document.querySelector(".settings__username__input");
+const passwordInput = document.querySelector(".settings__password__input");
 
 // Settings tab toggle
 let isSettingsOpen = false;
@@ -78,12 +52,15 @@ autoOff.addEventListener("click", () => {
 
 const root = document.documentElement;
 
-// Light/dark color toggle
+// light/dark color toggle
 let isLightOn = true;
 lightMode.addEventListener("click", () => {
     if (!isLightOn) {
+        usernameInput.classList.toggle("input__dark")
+        passwordInput.classList.toggle("input__dark")
         lightMode.classList.toggle("active");
         darkMode.classList.toggle("active");
+
         isLightOn = !isLightOn;
 
         lightMode.classList.toggle("dark-mode");
@@ -103,6 +80,8 @@ lightMode.addEventListener("click", () => {
 })
 darkMode.addEventListener("click", () => {
     if (isLightOn) {
+        usernameInput.classList.toggle("input__dark")
+        passwordInput.classList.toggle("input__dark")
         lightMode.classList.toggle("active");
         darkMode.classList.toggle("active");
         isLightOn = !isLightOn;
@@ -180,27 +159,38 @@ const refreshCount = document.querySelector(".refresh__count__slider");
 const speedOut = document.querySelector(".refresh__speed__output");
 const countOut = document.querySelector(".refresh__count__output");
 
+let refreshSpeedValue = 5;
 refreshSpeed.addEventListener('input', () => {
     speedOut.textContent = refreshSpeed.value;
+    // 10 is 1s, 9 is 2s, ... 1 is 10s
+    refreshSpeedValue = 11 - refreshSpeed.value; 
 })
 
+let refreshCountValue = -1;
 refreshCount.addEventListener('input', () => {
     if (refreshCount.value == 100) {
         countOut.textContent = "All";
     } else if (refreshCount.value > 90) {
         countOut.textContent = "150";
+        refreshCountValue = 150;
     } else if (refreshCount.value > 80) {
         countOut.textContent = "125";
+        refreshCountValue = 125;
     } else if (refreshCount.value > 70) {
         countOut.textContent = "100";
+        refreshCountValue = 100;
     } else if (refreshCount.value > 60) {
         countOut.textContent = "80";
+        refreshCountValue = 80;
     } else if (refreshCount.value > 50) {
         countOut.textContent = "40";
+        refreshCountValue = 40;
     } else if (refreshCount.value > 40) {
         countOut.textContent = "25";
+        refreshCountValue = 25;
     } else if (refreshCount.value > 0) {
         countOut.textContent = Math.floor(refreshCount.value / 2);
+        refreshCountValue = Math.floor(refreshCount.value / 2);
     }    
 })
 
@@ -235,17 +225,33 @@ interactCount.addEventListener('input', () => {
 })
 
 
-// figure this thing out *//////////////////////////////////////////
 window.addEventListener('DOMContentLoaded', () => {
-    refreshButton.addEventListener('click', () => {
-        window.electron.runPythonScript().then(result => {
-            console.log('Script Output:', result.output);
-            alert('Script executed. Check the console for output.');
-        }).catch(error => {
-            console.error('Error:', error.error);
-            alert('Error executing script.');
+    refreshButton.addEventListener('click', async () => {
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+        const refreshCountString = "" + refreshCountValue;
+        const refreshSpeedString = "" + refreshSpeedValue;
+
+        fetch('http://127.0.0.1:5000/start', {  // eventually change to non-dev server
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, refreshCountString, refreshSpeedString }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
     });
 });
+
+
+
+
+
 
 

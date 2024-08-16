@@ -48,6 +48,7 @@
     list-style: none;
     font-weight: 500;
     letter-spacing: 0.2rem;
+    margin-top: 0.3rem;
 
     font-size: var(--size-xl);
     line-height: 3rem;
@@ -55,10 +56,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
-
-
 .settings__username{
     display: flex;
     flex-direction: row;
@@ -73,23 +72,27 @@
     gap: 1rem;
     width: 100%;
 }
-
-.settings__username__input{
+.settings__username__input, .settings__password__input{
     width: 8rem;
     height: 1.5rem;
-    font-size: var(--size-lg);
-
+    font-size: var(--size-base);
+    font-weight: 600;
+    font-family: 'Satoshi', sans-serif;
+    text-decoration: none;
+    padding-left: 0.5rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1em;
+    
     background-color: #f0e5e5;
     border: none;
+    border-radius: 5px;
 }
 .settings__password__input{
     margin-left: 0.4rem;
-    width: 8rem;
-    height: 1.5rem;
-    font-size: var(--size-lg);
-
-    background-color: #f0e5e5;
-    border: none;
+}
+.input__dark{
+    background-color: rgba(128, 128, 128, 0.25);
+    color: var(--clr-white);
 }
 .settings__auto{
     font-size: var(--size-lg);
@@ -98,6 +101,10 @@
     transition: all 0.1s ease-in-out;
     transform: translateY(0.1rem);
     cursor: pointer;
+
+}
+.settings__auto__off{
+   margin-left: 0.2rem;
 }
 .settings__moon {
     width: var(--size-xl);
@@ -106,6 +113,8 @@
     color: rgba(0, 0, 0, 0.15);
     transition: all 0.1s ease-in-out;
     cursor: pointer;
+
+    margin-left: 0.4rem;
 }
 .settings__sun {
     width: var(--size-2xl);

@@ -70,7 +70,6 @@ svg {
 
 input:focus{
   outline: none;
-  font-family: 'Satoshi', sans-serif;
 }
 
 button{
@@ -80,26 +79,4 @@ button{
   background: none;
   cursor: pointer;
   color: inherit; 
-}
-
-a {
-  color: none;
-}
-
-strong {
-  color: none;
-}
-
-/* css tricks scrollbar https://css-tricks.com/almanac/properties/s/scrollbar/ */
-body::-webkit-scrollbar {
-  width: 8px;
-}
- 
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
- 
-body::-webkit-scrollbar-thumb {
-  background-color: var(--clr-n400);
-  outline: 1px solid var(--clr-n400);
 }

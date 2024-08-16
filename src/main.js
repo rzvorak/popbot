@@ -1,14 +1,14 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('node:path');
-const { exec } = require('child_process');
+const { execFile } = require('child_process');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+let flaskServer;
+
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
 const createWindow = () => {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 600,
     height: 500,
@@ -19,12 +19,12 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      enableRemoteModule: false,
       nodeIntegration: true
     },
   });
 
-  // and load the index.html of the app.
+  mainWindow.loadURL('http://127.0.0.1:5000'); // Adjust URL as needed
+
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
@@ -32,42 +32,45 @@ const createWindow = () => {
   }
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow();
+  const currentDir = __dirname;
+  const parentDir = path.dirname(currentDir); 
+  const grandParentDir = path.dirname(parentDir); 
+  const exePath = path.join(grandParentDir, 'dist', 'refresh-handler.exe');
+  
+  console.log('Starting Flask server at:', exePath);
 
-      ipcMain.handle('run-python-script', async () => {
-        return new Promise((resolve, reject) => {
-            console.log("got to here");
-            exec('python ../refresh.py', (error, stdout, stderr) => {
-                if (error) {
-                    reject({ error: stderr });
-                } else {
-                    resolve({ output: stdout });
-                }
-            });
-        });
-    });
+  flaskServer = execFile(exePath, [], (error, stdout, stderr) => {
+    if (error) {
+      console.error('Failed to start Flask server:', error);
+      return;
+    }
+    if (stderr) {
+      console.error('Flask server error output:', stderr);
+      return;
+    }
+    console.log('Flask server output:', stdout);
+  });
+
+  createWindow();
+}).catch(err => {
+  console.error('Error during app initialization:', err);
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+app.on('before-quit', () => {
+  if (flaskServer) {
+    flaskServer.kill(); // Ensure the server is killed before quitting
+  }
+});
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-// On OS X it's common to re-create a window in the app when the
-// dock icon is clicked and there are no other windows open.
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

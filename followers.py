@@ -73,7 +73,6 @@ followerTab.click()
 
 time.sleep(2)
 
-
 popup = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid="user__items"]')))
 previous_height = driver.execute_script("return arguments[0].scrollHeight;", popup)
 
